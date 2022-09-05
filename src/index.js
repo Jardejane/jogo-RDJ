@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDataBase = require('./database/database.js')
 const routeRegistration = require('./registration/registration.route')
+
 const routeLogin = require('./login/login.route')
 
 const PORT = process.env.PORT || 3000
