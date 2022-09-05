@@ -1,7 +1,7 @@
 const serviceRegistration = require("./registration.service");
 
 const controllerCreateRegistration = async (req, res) => {
-//   try {
+  try {
     const { name, username, email, password } = req.body;
     if (!name || !username || !email || !password) {
       return res.status(400).send({
@@ -29,9 +29,9 @@ const controllerCreateRegistration = async (req, res) => {
         email,
       },
     });
-//   } catch (error) {
-//     console.log("erro ao tentar cadastrar " + error);
-//   }
+  } catch (error) {
+    console.log("erro ao tentar cadastrar " + error);
+  }
 };
 
 module.exports = {controllerCreateRegistration};
