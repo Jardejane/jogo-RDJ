@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API GAMERDJ",
+    "description": "API IN GAME",
+    "contact": {
+      "email": "janefeitosalima49@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "heroku"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "API IN GAME AND LOCALHOST"
+    }
+  ],
+  "paths": {
+    "/inicial/registrartion": {
+      "post": {
+        "summary": "Create users new",
+        "description": "Router responsible for creationg users",
+        "tags": ["Registrartion"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "Users": {
+                  "value": {
+                    "name": "Jardejane",
+                    "username": "jane",
+                    "email": "janefeitosalima49@gmail.com",
+                    "password": "12345",
+                    "photograph": "https://i.imgur.com/Ry1cb5M.png"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+            "400":{
+                "description": "Not Foun"
+            },
+            "201":{
+                "description": "Created",
+                "content":{
+                    "application/json":{
+                        "schema":{
+                            "type":"object",
+                            "$ref":"#/components/schemas/Users"
+                        }
+                    }
+                }
+            }
+        }
+      }
+    },
+    "/login/entrar":{
+        "post":{
+            "summary": "Login",
+            "description": "Router responsible for login users",
+            "requestBody":{
+                "content":{
+                    "application/json":{
+                        "schema": {
+                            "$ref":"#/components/schemas/Users"
+                        },
+                        "examples": {
+                            "User": {
+                              "value": {
+                                "email": "jane@gmail.com",
+                                "password": "123"
+                              }
+                            }
+                          }
+                    }
+                }
+            },
+            "responses":{
+                 "400": {
+                    "description": "Not Found"
+                 },
+                 "200":{
+                    "description": "OK"
+                 }
+            }
+        }
+    },
+    "/login/users":{
+        "get":{
+            "summary": "all users",
+            "description": "Router responsible all users",
+            "tags":["Users"],
+            "security":[
+                {
+                    "token": []
+                }
+            ],
+            "parameters":[
+                {
+                    "in": "query",
+                    "name":"limit",
+                    "type": "string"
+                },
+                {
+                    "in": "query",
+                    "name": "offset",
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Users"
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Unauthorized"
+                },
+                "404": {
+                  "description": "Not Found"
+                }
+              }
+        }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "token": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": {
+    "token": []
+  }
+}
