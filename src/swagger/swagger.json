@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "heroku"
+      "url": " https://game-rdj.herokuapp.com"
     },
     {
       "url": "http://localhost:3000",
