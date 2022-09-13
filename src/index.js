@@ -16,7 +16,7 @@ connectDataBase();
 app.use(cors());
 app.use(express.json());
 
-app.use('/inicial', routeRegistration);
+app.use('/initial', routeRegistration);
 app.use('/login', routeLogin);
 app.use('/api-docs', swagger);
 
